@@ -31,9 +31,8 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
-					<h1><strong>{{ datos["titulo"] }}</strong></h1>
-					<span class="fa fa-star checked"> {{ datos['rating'] }}</span>
-					<h2>Fecha de lanzamiento: {{ datos['fecha'] }}</h2>
+					<h1><strong>{{ datos["titulo"] }}</strong> ({{ datos['fecha'] }})</h1>
+					<span class="fa fa-star checked"> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: </strong>{% for i in datos['generos'] %}{{ i + ' ' }}{% endfor %}</h3>
 					<h3>{{ datos['sinopsis'] }}</h3>
 				</header>
