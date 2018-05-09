@@ -14,6 +14,10 @@ tmdb_key = os.environ['tmdb_key']
 def inicio():
 	return render_template('index.html')
 
+@app.route('/busqueda2', methods = ['GET', 'POST'])
+def busqueda2():
+	
+
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
 	if request.method == 'GET':
