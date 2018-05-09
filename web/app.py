@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import json
 import requests
 import os
+import funciones
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def busqueda():
 		r = requests.get(URL_BASE_TMDB + 'movie', params = payload)
 		if r.status_code == 200:
 			js = r.json()
-			dic_res = {'titulo': js['results'][0]['title'], 'fecha': js['results'][0]['release_date']}
+			dic_res = {'titulo': js['results'][0]['title'], 'fecha': funciones.formathora(js['results'][0]['release_date'])}
 		return render_template('busqueda.html', datos = dic_res)
 
 app.run('0.0.0.0', 8080, debug = True)
