@@ -5,6 +5,11 @@
 {% block content %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+    color: orange;
+}
+</style>
 
 <nav id="nav">
 	<ul>
@@ -32,9 +37,10 @@
 			<div class="content">
 				<header class="major">
 					<h1><strong>{{ datos["titulo"] }}</strong> ({{ datos['fecha'] }})</h1>
-					<span class="fa fa-star checked"> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
+					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: </strong>{% for i in datos['generos'] %}{{ i + ' ' }}{% endfor %}</h3>
-					<h3>{{ datos['sinopsis'] }}</h3>
+					<p>{{ datos['sinopsis'] }}</p>
+					<h4>
 				</header>
 			</div>
 		</div>
