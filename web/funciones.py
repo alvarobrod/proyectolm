@@ -5,8 +5,11 @@ URL_BASE_TMDB = 'https://api.themoviedb.org/3/genre/movie/list'
 
 tmdb_key = os.environ['tmdb_key']
 
-def formathora(hora):
-	return '{}/{}/{}'.format(hora.split('-')[2], hora.split('-')[1], hora.split('-')[0])
+def formatfecha(fecha):
+	return '{}/{}/{}'.format(fecha.split('-')[2], fecha.split('-')[1], fecha.split('-')[0])
+
+def getaño(fecha):
+	return fecha.split('-')[0]
 
 def genero(lista):
 	payload = {'api_key': tmdb_key, 'language': 'es-ES'}
