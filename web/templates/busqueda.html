@@ -31,6 +31,7 @@
 				<header class="major">
 					<h1><strong>{{ datos["titulo"] }}</strong></h1>
 					<h2>Fecha de lanzamiento: {{ datos['fecha'] }}</h2>
+					<h2>Género: {% for i in datos['generos'] %}{{ i }}{% endfor %}
 				</header>
 			</div>
 		</div>

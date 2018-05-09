@@ -25,7 +25,7 @@ def busqueda():
 			r = requests.get(URL_BASE_TMDB + 'movie', params = payload)
 			if r.status_code == 200:
 				js = r.json()
-				dic_res = {'titulo': js['results'][0]['title'], 'fecha': funciones.formathora(js['results'][0]['release_date'])}
+				dic_res = {'titulo': js['results'][0]['title'], 'fecha': funciones.formathora(js['results'][0]['release_date']), 'generos': funciones.genero(js['results'][0]['genre_ids'])}
 			return render_template('busqueda.html', datos = dic_res, error = None)
 		else:
 			error = 'Debes introducir un título en el cuadro de búsqueda'
