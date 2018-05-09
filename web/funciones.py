@@ -13,12 +13,12 @@ def genero(lista):
 	r = requests.get(URL_BASE_TMDB, params = payload)
 	if r.status_code == 200:
 		js = r.json()
-		lista = []
+		l = []
 		generos = js['genres']
 		for i in lista:
 			for elem in generos:
 				if i == elem['id']:
-					lista.append(elem['name'])
-		return lista
+					l.append(elem['name'])
+		return l
 	else:
 		return 0

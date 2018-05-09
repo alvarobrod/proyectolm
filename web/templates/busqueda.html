@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <nav id="nav">
 	<ul>
 		<li><a href="/">Introducción</a></li>
@@ -29,9 +31,10 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
-					<h1><strong>{{ datos["titulo"] }}</strong></h1>
+					<h1><strong>{{ datos["titulo"] }}</strong></h1><span class="fa fa-star checked"></span>
 					<h2>Fecha de lanzamiento: {{ datos['fecha'] }}</h2>
-					<h2>Género: {% for i in datos['generos'] %}{{ i }}{% endfor %}
+					<h3><strong>Género: </strong>{% for i in datos['generos'] %}{{ i + ' ' }}{% endfor %}</h3>
+					<h3>{{ datos['sinopsis'] }}</h3>
 				</header>
 			</div>
 		</div>
