@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import json
 import requests
 import os
@@ -13,8 +13,12 @@ tmdb_key = os.environ['tmdb_key']
 def inicio():
 	return render_template('index.html')
 
-@app.route('/busqueda')
+@app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
-	return render_template('busqueda.html')
+	if request.method == 'GET':
+		return render_template('busqueda.html')
+	else:
+		titulo = request.form['titulo']
+		return render_template('busqueda.html', titulo = titulo)
 
 app.run('0.0.0.0', 8080, debug = True)
