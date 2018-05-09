@@ -7,15 +7,17 @@
 <nav id="nav">
 	<ul>
 		<li><a href="/">Introducción</a></li>
-		<li><a href="/busqueda" class="active">Búsqueda</a></li>
+		<li><a href="#busqueda" class="active">Búsqueda</a></li>
 		<li><a href="#first">Contacta conmigo</a></li>
 	</ul>
 </nav>
 
 <div id="main">
-	<section id ="first" class="main">
+	<section id ="busqueda" class="main">
 	{% if error %}
-	<p><strong>{{ error }}</strong></p>
+	<div class="danger">
+		<p><strong>{{ error }}</strong></p>
+	</div>
 	{% endif %}
 		<form action="/busqueda" method="post">
 			Título:<br>
