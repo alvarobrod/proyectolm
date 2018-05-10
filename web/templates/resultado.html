@@ -16,11 +16,7 @@
 
 <div id="main">
 	<section id ="busqueda" class="main">
-	{% if error %}
-	<div class="danger">
-		<p><strong>   {{ error }}</strong></p>
-	</div>
-	{% endif %}
+
 		<form action="/busqueda" method="post">
 			Título:<br>
 			<input type="text" name="titulo"><br>
@@ -31,11 +27,7 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
-					<h1><strong>{{ datos["titulo"] }}</strong> ({{ datos['fecha'] }})</h1>
-					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
-					<h3><strong>Género: </strong>{% for i in datos['generos'] %}{{ i + ' ' }}{% endfor %}</h3>
-					<p>{{ datos['sinopsis'] }}</p>
-					<h4>
+					<h1> {{ tipo }} {{ code }} </h1>
 				</header>
 			</div>
 		</div>

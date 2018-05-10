@@ -45,7 +45,7 @@ def busqueda():
 
 @app.route('/busqueda/<tipo>/<code>')
 def resultado(tipo, code):
-
+	return render_template('resultado.html', tipo = tipo, code = code)
 
 
 app.run('0.0.0.0', 8080, debug = True)
