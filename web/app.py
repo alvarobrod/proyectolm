@@ -59,6 +59,7 @@ def resultado(tipo, code):
 		if r.status_code == 200:
 			js = r.json()
 			titulo = js['name']
-		return render_template('resultado.html', titulo = titulo)
+			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview']}
+		return render_template('resultado.html', datos = dic_res)
 
 app.run('0.0.0.0', 8080, debug = True)
