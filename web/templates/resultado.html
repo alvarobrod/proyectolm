@@ -16,18 +16,10 @@
 
 <div id="main">
 	<section id ="busqueda" class="main">
-
-		<form action="/busqueda" method="post">
-			Título:<br>
-			<input type="text" name="titulo"><br>
-			<input type="radio" name="tipo" value="Películas"> Películas<br>
-			<input type="radio" name="tipo" value="Series"> Series<br><br>
-			<input type="submit" value="Buscar"><br>
-		</form>
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
-					<h1> {{ tipo }} {{ code }} </h1>
+					<h1> {{ titulo }} </h1>
 				</header>
 			</div>
 		</div>
