@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Beleflix | Búsqueda{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<nav id="nav">
+	<ul>
+		<li><a href="/">Introducción</a></li>
+		<li><a href="/busqueda2" class="active">Búsqueda</a></li>
+		<li><a href="#first">Contacta conmigo</a></li>
+	</ul>
+</nav>
+
+<div id="main">
+	<section id ="busqueda" class="main">
+	{% if error %}
+	<div class="danger">
+		<p><strong>   {{ error }}</strong></p>
+	</div>
+	{% endif %}
+		<form action="/busqueda" method="post">
+			Título:<br>
+			<input type="text" name="titulo"><br>
+			<input type="radio" name="tipo" value="Películas"> Películas<br>
+			<input type="radio" name="tipo" value="Series"> Series<br><br>
+			<input type="submit" value="Buscar"><br>
+		</form>
+		<div class="spotlight">
+			<div class="content">
+				<header class="major">
+					<h1><strong>{{ datos["titulo"] }}</strong> ({{ datos['fecha'] }})</h1>
+					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
+					<h3><strong>Género: </strong>{% for i in datos['generos'] %}{{ i + ' ' }}{% endfor %}</h3>
+					<p>{{ datos['sinopsis'] }}</p>
+					<h4>
+				</header>
+			</div>
+		</div>
+	</section>
+</div>
+
+{% endblock %}
