@@ -17,7 +17,9 @@ def inicio():
 @app.route('/busqueda2', methods = ['GET', 'POST'])
 def busqueda2():
 	if request.method == 'GET':
-		return render_template('busqueda2.html')
+		return render_template('busqueda2.html', datos = None)
+	else:
+		return render_template('busqueda2.html', datos = datos)
 
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
