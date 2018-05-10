@@ -30,7 +30,8 @@
 			<div class="content">
 				<header class="major">
 					{% for i in datos %}
-					<a href
+					<a href="/busqueda2/{{ datos[i]['id'] }}">{{ datos[i]['titulo'] }}</a>
+					{% endfor %}
 				</header>
 			</div>
 		</div>

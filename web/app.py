@@ -17,10 +17,22 @@ def inicio():
 @app.route('/busqueda2', methods = ['GET', 'POST'])
 def busqueda2():
 	if request.method == 'GET':
-		return render_template('busqueda2.html', datos = None)
+		return render_template('busqueda2.html', datos = None, error = None)
 	else:
-		if 
-		return render_template('busqueda2.html', datos = datos)
+		titulo_form = request.form['titulo']
+		if titulo_form != '':
+			if request.form['tipo'] == 'pelis':
+				payload = {'api_key': tmdb_key, 'language': 'es-ES', 'query': titulo_form}
+				r = requests.get(URL_BASE_TMDB + 'movie', params = payload)
+				if r.status_code == 200:
+					js = r.json()
+					lista = []
+					for i in js['results']:
+						lista.append({'titulo': js['results'][i]['title'], 'id': js['results'][i]['id']})
+					return render_template('busqueda2.html', datos = dic_res, error = None)
+		else:
+			error = '  Debes introducir un título en el cuadro de búsqueda'
+			return render_template('busqueda.html', datos = None, error = error)
 
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
