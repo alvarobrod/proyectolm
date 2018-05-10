@@ -14,9 +14,8 @@ tmdb_key = os.environ['tmdb_key']
 def inicio():
 	return render_template('index.html')
 
-@app.route('/busqueda2', methods = ['GET', 'POST'])
-def busqueda2():
-	
+# @app.route('/busqueda2', methods = ['GET', 'POST'])
+# def busqueda2():
 
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
@@ -32,7 +31,7 @@ def busqueda():
 				dic_res = {'titulo': js['results'][0]['title'], 'fecha': funciones.formatfecha(js['results'][0]['release_date']), 'generos': funciones.genero(js['results'][0]['genre_ids']), 'sinopsis': js['results'][0]['overview'], 'rating': js['results'][0]['vote_average'], 'votos': js['results'][0]['vote_count']}
 			return render_template('busqueda.html', datos = dic_res, error = None)
 		else:
-			error = 'Debes introducir un título en el cuadro de búsqueda'
+			error = '  Debes introducir un título en el cuadro de búsqueda'
 			return render_template('busqueda.html', datos = None, error = error)
 
 app.run('0.0.0.0', 8080, debug = True)

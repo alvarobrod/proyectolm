@@ -2139,7 +2139,6 @@
 		display: block;
 		float: left;
 		margin-right: -2em;
-		opacity: 0;
 		width: 1em;
 		z-index: -1;
 	}
@@ -3805,4 +3804,9 @@
 	.danger {
     	background-color: #ffdddd;
     	border-left: 6px solid #f44336;
+	}
+
+
+	.checked {
+    	color: orange;
 	}
