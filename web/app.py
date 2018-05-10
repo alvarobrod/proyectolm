@@ -51,14 +51,14 @@ def resultado(tipo, code):
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code, params = payload)
 		if r.status_code == 200:
 			js = r.json()
-			titulo = js['title']
-		return render_template('resultado.html', titulo = titulo)
+			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview']}
+		return render_template('resultado.html', datos = dic_res)
 	else:
-		payload = {'api_key': tmdb_key, 'language': language, 'movie_id': code}
-		r = requests.get(URL_BASE_TMDB + 'movie/' + code, params = payload)
+		payload = {'api_key': tmdb_key, 'language': language}
+		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
 		if r.status_code == 200:
 			js = r.json()
-			titulo = js['title']
+			titulo = js['name']
 		return render_template('resultado.html', titulo = titulo)
 
 app.run('0.0.0.0', 8080, debug = True)
