@@ -51,7 +51,7 @@ def resultado(tipo, code):
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code, params = payload)
 		if r.status_code == 200:
 			js = r.json()
-			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview']}
+			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': js['genres']}
 		return render_template('resultado.html', datos = dic_res)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
