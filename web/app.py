@@ -19,6 +19,7 @@ def busqueda2():
 	if request.method == 'GET':
 		return render_template('busqueda2.html', datos = None)
 	else:
+		if 
 		return render_template('busqueda2.html', datos = datos)
 
 @app.route('/busqueda', methods = ['GET', 'POST'])
