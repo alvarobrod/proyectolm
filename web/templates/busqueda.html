@@ -16,10 +16,10 @@
 	<section id ="busqueda" class="main">
 	{% if error %}
 	<div class="danger">
-		<p><strong>  {{ error }}</strong></p>
+		<p><strong>{{ error }}</strong></p>
 	</div>
 	{% endif %}
-		<form action="/busqueda2" method="post">
+		<form action="/busqueda" method="post">
 			Título:<br>
 			<input type="text" name="titulo"><br>
 			<input type="radio" name="tipo" value="pelis"> Películas<br>
@@ -30,7 +30,7 @@
 			<div class="content">
 				<header class="major">
 					{% for i in datos %}
-					<a href="/busqueda2/{{ i['id'] }}">{{ i['titulo'] }}</a><br>
+					<a href="/busqueda/{{ i['id'] }}">{{ i['titulo'] }}</a><br>
 					{% endfor %}
 				</header>
 			</div>

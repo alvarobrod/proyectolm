@@ -29,7 +29,7 @@ def busqueda():
 					lista = []
 					for i in js['results']:
 						lista.append({'titulo': i['title'], 'id': i['id']})
-					return render_template('busqueda.html', datos = lista, error = None)
+					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
 			else:
 				payload = {'api_key': tmdb_key, 'language': 'es-ES', 'query': titulo_form, 'page': '1'}
 				r = requests.get(URL_BASE_TMDB + 'tv', params = payload)
@@ -38,10 +38,14 @@ def busqueda():
 					lista = []
 					for i in js['results']:
 						lista.append({'titulo': i['name'], 'id': i['id']})
-					return render_template('busqueda.html', datos = lista, error = None)
+					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
 		else:
-			error = '  Debes introducir un título en el cuadro de búsqueda'
+			error = '  Debes introducir un título en el cuadro de búsqueda.'
 			return render_template('busqueda.html', error = error)
+
+# @app.route('/busqueda/<code>')
+# def resultado(code):
+
 
 
 app.run('0.0.0.0', 8080, debug = True)
