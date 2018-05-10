@@ -2136,10 +2136,6 @@
 		-webkit-appearance: radio;
 		-ms-appearance: radio;
 		appearance: radio;
-		display: block;
-		float: left;
-		margin-right: -2em;
-		width: 1em;
 		z-index: -1;
 	}
 
