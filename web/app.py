@@ -22,13 +22,22 @@ def busqueda2():
 		titulo_form = request.form['titulo']
 		if titulo_form != '':
 			if request.form['tipo'] == 'pelis':
-				payload = {'api_key': tmdb_key, 'language': 'es-ES', 'query': titulo_form}
+				payload = {'api_key': tmdb_key, 'language': 'es-ES', 'query': titulo_form, 'page': '1'}
 				r = requests.get(URL_BASE_TMDB + 'movie', params = payload)
 				if r.status_code == 200:
 					js = r.json()
 					lista = []
 					for i in js['results']:
 						lista.append({'titulo': i['title'], 'id': i['id']})
+					return render_template('busqueda2.html', datos = lista, error = None)
+			else:
+				payload = {'api_key': tmdb_key, 'language': 'es-ES', 'query': titulo_form, 'page': '1'}
+				r = requests.get(URL_BASE_TMDB + 'tv', params = payload)
+				if r.status_code == 200:
+					js = r.json()
+					lista = []
+					for i in js['results']:
+						lista.append({'titulo': i['name'], 'id': i['id']})
 					return render_template('busqueda2.html', datos = lista, error = None)
 		else:
 			error = '  Debes introducir un título en el cuadro de búsqueda'
