@@ -40,11 +40,11 @@ def busqueda():
 						lista.append({'titulo': i['name'], 'id': i['id']})
 					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
 		else:
-			error = '  Debes introducir un título en el cuadro de búsqueda.'
+			error = 'Debes introducir un título en el cuadro de búsqueda.'
 			return render_template('busqueda.html', error = error)
 
-# @app.route('/busqueda/<code>')
-# def resultado(code):
+@app.route('/busqueda/<tipo>/<code>')
+def resultado(code):
 
 
 
