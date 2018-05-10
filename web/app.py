@@ -17,7 +17,7 @@ def inicio():
 @app.route('/busqueda2', methods = ['GET', 'POST'])
 def busqueda2():
 	if request.method == 'GET':
-		return render_template('busqueda2.html', datos = None, error = None)
+		return render_template('busqueda2.html', error = None)
 	else:
 		titulo_form = request.form['titulo']
 		if titulo_form != '':
@@ -28,11 +28,11 @@ def busqueda2():
 					js = r.json()
 					lista = []
 					for i in js['results']:
-						lista.append({'titulo': js['results'][i]['title'], 'id': js['results'][i]['id']})
-					return render_template('busqueda2.html', datos = dic_res, error = None)
+						lista.append({'titulo': i['title'], 'id': i['id']})
+					return render_template('busqueda2.html', datos = lista, error = None)
 		else:
 			error = '  Debes introducir un título en el cuadro de búsqueda'
-			return render_template('busqueda.html', datos = None, error = error)
+			return render_template('busqueda2.html', error = error)
 
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
