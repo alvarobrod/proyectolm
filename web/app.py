@@ -51,7 +51,7 @@ def resultado(tipo, code):
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code, params = payload)
 		if r.status_code == 200:
 			js = r.json()
-			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': js['genres'], 'poster': js['poster_path']}
+			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
 		return render_template('resultado.html', datos = dic_res)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
@@ -59,7 +59,7 @@ def resultado(tipo, code):
 		if r.status_code == 200:
 			js = r.json()
 			titulo = js['name']
-			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': js['genres'], 'poster': js['poster_path']}
+			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
 		return render_template('resultado.html', datos = dic_res)
 
 app.run('0.0.0.0', 8080, debug = True)
