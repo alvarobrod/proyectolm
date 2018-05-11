@@ -22,7 +22,7 @@ def busqueda():
 		return render_template('busqueda.html', error = None)
 	else:
 		titulo_form = request.form['titulo']
-		if titulo_form != '' and :
+		if titulo_form != '':
 			if request.form['tipo'] == 'pelis':
 				payload = {'api_key': tmdb_key, 'language': language, 'query': titulo_form, 'page': '1'}
 				r = requests.get(URL_BASE_TMDB + 'search/movie', params = payload)
@@ -42,7 +42,7 @@ def busqueda():
 						lista.append({'titulo': i['name'], 'id': i['id']})
 					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
 		else:
-			error = 'Por favor, introduce un texto en el cuadro de búsqueda y selecciona películas o series.'
+			error = 'Debes introducir un título en el cuadro de búsqueda.'
 			return render_template('busqueda.html', error = error)
 
 @app.route('/busqueda/<tipo>/<code>')
