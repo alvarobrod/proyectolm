@@ -7,7 +7,6 @@ import funciones
 app = Flask(__name__)
 
 URL_BASE_TMDB = 'https://api.themoviedb.org/3/'
-URL_BASE_IMAGE = 'https://image.tmdb.org/t/p/w300'
 language = 'es-ES'
 
 tmdb_key = os.environ['tmdb_key']

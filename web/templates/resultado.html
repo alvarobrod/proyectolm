@@ -19,11 +19,12 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
+					<img src="https://image.tmdb.org/t/p/w300{{ datos["poster"] }}" alt="Poster">
 					<h1><strong>{{ datos["titulo"] }}</strong> ({{ datos['año'] }})</h1>
 					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: {% for i in datos['generos'] %} {{ i['name'] }} {% endfor %}</strong></h3>
 					<p>{{ datos['sinopsis'] }}</p>
-					<h4>
+					
 				</header>
 			</div>
 		</div>
