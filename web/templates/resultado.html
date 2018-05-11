@@ -15,11 +15,11 @@
 </nav>
 
 <div id="main">
-	<section id ="busqueda" class="main">
+	<section id ="resultado" class="main">
 		<div class="spotlight">
+			<img src="https://image.tmdb.org/t/p/w300{{ datos['poster'] }}" alt="Poster">
 			<div class="content">
 				<header class="major">
-					<img src="https://image.tmdb.org/t/p/w300{{ datos['poster'] }}" alt="Poster">
 					<h1><strong>{{ datos['titulo'] }}</strong> ({{ datos['año'] }})</h1>
 					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: {{ datos['generos'] }}</strong></h3>
