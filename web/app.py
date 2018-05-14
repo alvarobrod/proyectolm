@@ -54,7 +54,13 @@ def resultado(tipo, code):
 			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'movie/' + '{}/credits'.format(code), params = payload2)
-		return render_template('resultado.html', datos = dic_res)
+			if r2.status_code == 200:
+				js2 = r2.json()
+				lis = []
+				cast = js2['cast']
+				for i in range(0, 3):
+					lis.append(cast[i])
+				return render_template('resultado.html', datos = dic_res, cast = funciones.generos(lis))
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
@@ -64,6 +70,12 @@ def resultado(tipo, code):
 			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'tv/' + '{}/credits'.format(code), params = payload2)
-		return render_template('resultado.html', datos = dic_res)
+			if r2.status_code == 200:
+				js2 = r2.json()
+				lis = []
+				cast = js2['cast']
+				for i in range(0, 3):
+					lis.append(cast[i])
+				return render_template('resultado.html', datos = dic_res, cast = funciones.generos(lis))
 
 app.run('0.0.0.0', 8080, debug = True)
