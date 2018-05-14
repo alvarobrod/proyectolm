@@ -10,6 +10,7 @@ URL_BASE_TMDB = 'https://api.themoviedb.org/3/'
 language = 'es-ES'
 
 tmdb_key = os.environ['tmdb_key']
+port = os.environ["PORT"]
 
 @app.route('/')
 def inicio():
@@ -78,4 +79,4 @@ def resultado(tipo, code):
 					lis.append(cast[i])
 				return render_template('resultado.html', datos = dic_res, cast = funciones.generos(lis))
 
-app.run('0.0.0.0', 5000, debug = True)
+app.run('0.0.0.0', int(port), debug=True)
