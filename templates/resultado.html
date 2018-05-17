@@ -31,6 +31,14 @@
 					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: {{ datos['generos'] }}</strong></h3>
 					<p>{{ datos['sinopsis'] }}</p>
+					{% if tipo != "pelis" %}
+					<h3>Temporadas:</h3>
+					<ul>
+					{% for i in datos['temporadas'] %}
+					<li>{{ i }}</li>
+					{% endfor %}
+					</ul>
+					{% endif %}
 				</header>
 			</div>
 		</div>
