@@ -16,3 +16,9 @@ def generos(lista):
 	for i in lista:
 		l.append(i['name'])
 	return ', '.join(l)
+
+def temporadas(lista):
+	l = []
+	for i in lista:
+		l.append('{} ({}), {} episodios'.format(i['name'], getaño(i['air_date']), i['episode_count']))
+	return l
