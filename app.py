@@ -59,9 +59,13 @@ def resultado(tipo, code):
 				js2 = r2.json()
 				lis = []
 				cast = js2['cast']
-				for i in range(0, 3):
-					lis.append(cast[i])
-				return render_template('resultado.html', datos = dic_res, cast = funciones.generos(lis))
+				if not cast:
+					reparto = None
+				else:
+					for i in range(0, 3):
+						lis.append(cast[i])
+						reparto = funciones.generos(lis)
+				return render_template('resultado.html', datos = dic_res, cast = reparto)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
@@ -75,8 +79,13 @@ def resultado(tipo, code):
 				js2 = r2.json()
 				lis = []
 				cast = js2['cast']
-				for i in range(0, 3):
-					lis.append(cast[i])
-				return render_template('resultado.html', datos = dic_res, cast = funciones.generos(lis))
+				if not cast:
+					reparto = None
+				else:
+					for i in range(0, 3):
+						lis.append(cast[i])
+						reparto = funciones.generos(lis)
+
+				return render_template('resultado.html', datos = dic_res, cast = reparto)
 
 app.run('0.0.0.0', int(port), debug=True)
