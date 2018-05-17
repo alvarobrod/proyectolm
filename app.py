@@ -65,14 +65,14 @@ def resultado(tipo, code):
 					for i in range(0, 3):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
-				return render_template('resultado.html', datos = dic_res, cast = reparto)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
 		if r.status_code == 200:
 			js = r.json()
 			titulo = js['name']
-			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
+			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], 'generos': funciones.generos(js['genres']), 'poster': js['poster_path'], 'estado': js['status']}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'tv/' + '{}/credits'.format(code), params = payload2)
 			if r2.status_code == 200:
@@ -86,6 +86,6 @@ def resultado(tipo, code):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
 
-				return render_template('resultado.html', datos = dic_res, cast = reparto)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
 
 app.run('0.0.0.0', int(port), debug=True)
