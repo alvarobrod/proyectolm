@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
+from requests_oauthlib import OAuth2Session
 import json
 import requests
 import os
@@ -11,6 +12,10 @@ language = 'es-ES'
 
 tmdb_key = os.environ['tmdb_key']
 port = os.environ["PORT"]
+
+redirect_uri = 'https://beleflix.herokuapp.com/spotify_callback'
+scope_sp = 'user-read-private user-read-email'
+token_url_sp = 'https://accounts.spotify.com/api/token'
 
 @app.route('/')
 def inicio():
@@ -53,7 +58,7 @@ def resultado(tipo, code):
 		if r.status_code == 200:
 			js = r.json()
 			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': js['overview'], \
-			                                                          'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
+																	  'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'movie/' + '{}/credits'.format(code), params = payload2)
 			if r2.status_code == 200:
@@ -89,5 +94,25 @@ def resultado(tipo, code):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
+
+def validtoken():
+	try:
+		token=json.loads(session['token_sp'])
+	except:
+		token = False
+	if token:
+		token_ok = True
+		try:
+			oauth2 = OAuth2Session(os.environ['client_id'], token=token)
+			r = oauth2.get('https://api.spotify.com/v1/me')
+		except TokenExpiredError as e:
+			token_ok = False
+	else:
+		token_ok = False
+	return token_ok
+
+@app.route('/spotify')
+def spotify():
+    return render_template('spotify.html')
 
 app.run('0.0.0.0', int(port), debug=True)
