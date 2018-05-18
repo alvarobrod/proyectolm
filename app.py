@@ -6,6 +6,7 @@ import os
 import funciones
 
 app = Flask(__name__)
+app.secret_key= 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 URL_BASE_TMDB = 'https://api.themoviedb.org/3/'
 language = 'es-ES'
@@ -117,13 +118,36 @@ def spotify():
 
 @app.route('/perfil_spotify')
 def info_perfil_spotify():
-	if token_valido_spotify():
-		return redirect("/perfil_usuario_spotify")
-  	else:
-		oauth2 = OAuth2Session(os.environ["client_id_spotify"], redirect_uri=redirect_uri_sp,scope=scope_sp)
+	if validtoken():
+		return redirect('/perfil_usuario_spotify')
+	else:
+		oauth2 = OAuth2Session(os.environ['client_id'], redirect_uri = redirect_uri, scope = scope_sp)
 		authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
-		session.pop("token_sp",None)
-		session["oauth_state_sp"]=state
+		session.pop('token_sp', None)
+		session['oauth_state_sp'] = state
 		return redirect(authorization_url)
 
-app.run('0.0.0.0', int(port), debug=True)
+@app.route('/spotify_callback')
+def get_token_spotify():
+	oauth2 = OAuth2Session(os.environ['client_id'], state = session['oauth_state_sp'], redirect_uri = redirect_uri)
+	token = oauth2.fetch_token(token_url_sp, client_secret = os.environ['client_secret'], authorization_response = request.url[:4] + 's' + request.url[4:])
+	session['token_sp'] = json.dumps(token)
+	return redirect('/perfil_usuario_spotify')
+
+@app.route('/perfil_usuario_spotify')
+def info_perfil_usuario_spotify():
+	if validtoken():
+		token = json.loads(session['token_sp'])
+		oauth2 = OAuth2Session(os.environ['client_id'], token = token)
+		r = oauth2.get('https://api.spotify.com/v1/me')
+		doc = json.loads(r.content.decode('utf-8'))
+		return render_template('perfil_spotify.html', datos = doc)
+	else:
+		return redirect('/perfil')
+
+@app.route('/logout_spotify')
+def salir_spotify():
+	session.pop('token_sp', None)
+	return redirect('/spotify')
+
+app.run('0.0.0.0', int(port), debug = True)
