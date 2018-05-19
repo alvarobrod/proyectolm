@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.secret_key= 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 URL_BASE_TMDB = 'https://api.themoviedb.org/3/'
+URL_BASE_SP = 'https://api.spotify.com/v1/search'
 language = 'es-ES'
 
 tmdb_key = os.environ['tmdb_key']
