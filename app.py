@@ -134,10 +134,9 @@ def resultado(tipo, code):
 				if 'token_sp' in session:
 						headers = {'Accept': 'application/json', 'Content-Type': 'application-json', 'Authorization': 'Bearer ' + session['token_sp']}
 						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'market': 'ES', 'limit': 1}
-						r_sp = requests.get(URL_BASE_SP, params = pl_sp, headers = headers)
+						r_sp = oauth.get(URL_BASE_SP, params = pl_sp, headers = headers)
 						if r_sp.status_code == 200:
-							jsp = r_sp.json()
-							datos_sp = {'nombrepl': jsp['playlists']['items'][0]['name'], 'url': jsp['playlists']['items'][0]['external_urls']['spotify']}
+							datos_sp = {'nombrepl': r_sp['playlists']['items'][0]['name'], 'url': r_sp['playlists']['items'][0]['external_urls']['spotify']}
 				else:
 					datos_sp = None
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
