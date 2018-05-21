@@ -138,6 +138,8 @@ def resultado(tipo, code):
 						if r_sp.status_code == 200:
 							jsp = r_sp.json()
 							datos_sp = {'nombrepl': jsp['playlists']['items'][0]['name'], 'url': jsp['playlists']['items'][0]['external_urls']['spotify']}
+				else:
+					datos_sp = None
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
