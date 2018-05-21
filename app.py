@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+from requests_oauthlib import OAuth1
 from requests_oauthlib import OAuth2Session
 import json
 import requests
