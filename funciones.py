@@ -22,3 +22,7 @@ def temporadas(lista):
 	for i in lista:
 		l.append('{} ({}), {} episodios'.format(i['name'], getaño(i['air_date']), i['episode_count']))
 	return l
+
+def quitaespacios(cadena):
+	cad = cadena.replace(' ', '%20')
+	return cad
