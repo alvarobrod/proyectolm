@@ -4,7 +4,15 @@
 
 {% block content %}
 
-<h1>OAuth 2 - Spotify</h1>
+<nav id="nav">
+	<ul>
+		<li><a href="/">Introducción</a></li>
+		<li><a href="#busqueda" class="active">Búsqueda</a></li>
+		<li><a href="/spotify">Login con Spotify</a></li>
+	</ul>
+</nav>
+
+<h1>Spotify</h1>
 <a href="/perfil_spotify"><button type="button" class="btn btn-primary btn-sm">Haz login en Spotify para poder realizar búsquedas de BSO</button></a><br/>
 
 {% endblock %}
