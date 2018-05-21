@@ -131,6 +131,9 @@ def resultado(tipo, code):
 					for i in range(0, 3):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
+				if 'token_sp' in session:
+						pl_sp = {'q': dic_res['titulo'], 'type': 'playlist', 'market': 'ES', 'limit': 1}
+						
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
