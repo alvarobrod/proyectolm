@@ -23,6 +23,64 @@ token_url_sp = 'https://accounts.spotify.com/api/token'
 def inicio():
 	return render_template('index.html')
 
+# Spotify
+
+def validtoken():
+	try:
+		token=json.loads(session['token_sp'])
+	except:
+		token = False
+	if token:
+		token_ok = True
+		try:
+			oauth2 = OAuth2Session(os.environ['client_id'], token=token)
+			r = oauth2.get('https://api.spotify.com/v1/me')
+		except TokenExpiredError as e:
+			token_ok = False
+	else:
+		token_ok = False
+	return token_ok
+
+@app.route('/spotify')
+def spotify():
+	return render_template('spotify.html')
+
+@app.route('/perfil_spotify')
+def info_perfil_spotify():
+	if validtoken():
+		return redirect('/perfil_usuario_spotify')
+	else:
+		oauth2 = OAuth2Session(os.environ['client_id'], redirect_uri = redirect_uri, scope = scope_sp)
+		authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
+		session.pop('token_sp', None)
+		session['oauth_state_sp'] = state
+		return redirect(authorization_url)
+
+@app.route('/spotify_callback')
+def get_token_spotify():
+	oauth2 = OAuth2Session(os.environ['client_id'], state = session['oauth_state_sp'], redirect_uri = redirect_uri)
+	token = oauth2.fetch_token(token_url_sp, client_secret = os.environ['client_secret'], authorization_response = request.url[:4] + 's' + request.url[4:])
+	session['token_sp'] = json.dumps(token)
+	return redirect('/perfil_usuario_spotify')
+
+@app.route('/perfil_usuario_spotify')
+def info_perfil_usuario_spotify():
+	if validtoken():
+		token = json.loads(session['token_sp'])
+		oauth2 = OAuth2Session(os.environ['client_id'], token = token)
+		r = oauth2.get('https://api.spotify.com/v1/me')
+		doc = json.loads(r.content.decode('utf-8'))
+		return render_template('perfil_spotify.html', datos = doc)
+	else:
+		return redirect('/perfil')
+
+@app.route('/logout_spotify')
+def salir_spotify():
+	session.pop('token_sp', None)
+	return redirect('/spotify')
+
+# TMDB
+
 @app.route('/busqueda', methods = ['GET', 'POST'])
 def busqueda():
 	if request.method == 'GET':
@@ -96,59 +154,5 @@ def resultado(tipo, code):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
-
-def validtoken():
-	try:
-		token=json.loads(session['token_sp'])
-	except:
-		token = False
-	if token:
-		token_ok = True
-		try:
-			oauth2 = OAuth2Session(os.environ['client_id'], token=token)
-			r = oauth2.get('https://api.spotify.com/v1/me')
-		except TokenExpiredError as e:
-			token_ok = False
-	else:
-		token_ok = False
-	return token_ok
-
-@app.route('/spotify')
-def spotify():
-	return render_template('spotify.html')
-
-@app.route('/perfil_spotify')
-def info_perfil_spotify():
-	if validtoken():
-		return redirect('/perfil_usuario_spotify')
-	else:
-		oauth2 = OAuth2Session(os.environ['client_id'], redirect_uri = redirect_uri, scope = scope_sp)
-		authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
-		session.pop('token_sp', None)
-		session['oauth_state_sp'] = state
-		return redirect(authorization_url)
-
-@app.route('/spotify_callback')
-def get_token_spotify():
-	oauth2 = OAuth2Session(os.environ['client_id'], state = session['oauth_state_sp'], redirect_uri = redirect_uri)
-	token = oauth2.fetch_token(token_url_sp, client_secret = os.environ['client_secret'], authorization_response = request.url[:4] + 's' + request.url[4:])
-	session['token_sp'] = json.dumps(token)
-	return redirect('/perfil_usuario_spotify')
-
-@app.route('/perfil_usuario_spotify')
-def info_perfil_usuario_spotify():
-	if validtoken():
-		token = json.loads(session['token_sp'])
-		oauth2 = OAuth2Session(os.environ['client_id'], token = token)
-		r = oauth2.get('https://api.spotify.com/v1/me')
-		doc = json.loads(r.content.decode('utf-8'))
-		return render_template('perfil_spotify.html', datos = doc)
-	else:
-		return redirect('/perfil')
-
-@app.route('/logout_spotify')
-def salir_spotify():
-	session.pop('token_sp', None)
-	return redirect('/spotify')
 
 app.run('0.0.0.0', int(port), debug = True)
