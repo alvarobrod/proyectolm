@@ -13,7 +13,7 @@ URL_BASE_SP = 'https://api.spotify.com/v1/search'
 language = 'es-ES'
 
 tmdb_key = os.environ['tmdb_key']
-port = os.environ["PORT"]
+port = os.environ['PORT']
 
 redirect_uri = 'https://beleflix.herokuapp.com/spotify_callback'
 scope_sp = 'user-read-private user-read-email'
