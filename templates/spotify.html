@@ -4,7 +4,18 @@
 
 {% block content %}
 
-<h1>Spotify</h1>
-<a href="/perfil_spotify"><button type="button" class="btn btn-primary btn-sm">Haz login en Spotify para poder realizar búsquedas de BSO</button></a><br/>
+<!-- Nav -->
+<nav id="nav">
+	<ul>
+		<li><a href="/">Introducción</a></li>
+		<li><a href="/busqueda">Búsqueda</a></li>
+        <li><a href="/spotify" class="active">Login con Spotify</a></li>
+	</ul>
+</nav>
+
+<div id="main">
+	<h1>Spotify</h1>
+	<a href="/perfil_spotify"><button type="button" class="btn btn-primary btn-sm">Haz login en Spotify para poder realizar búsquedas de BSO</button></a><br/>
+</div>
 
 {% endblock %}
