@@ -134,7 +134,7 @@ def resultado(tipo, code):
 						reparto = funciones.generos(lis)
 				if 'token_sp' in session:
 						headers = {'Accept': 'application/json', 'Content-Type': 'application-json', 'Authorization': 'Bearer ' + session['token_sp']}
-						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'market': 'ES', 'limit': 1}
+						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'limit': 1}
 						r_sp = oauth2.get(URL_BASE_SP, params = pl_sp, headers = headers)
 						if r_sp.status_code == 200:
 							datos_sp = {'nombrepl': r_sp['playlists']['items'][0]['name'], 'url': r_sp['playlists']['items'][0]['external_urls']['spotify']}
