@@ -26,3 +26,11 @@ def temporadas(lista):
 def quitaespacios(cadena):
 	cad = cadena.replace(' ', '%20')
 	return cad
+
+def tratarsinopsis(cadena):
+	cad = ''
+	if cadena = '':
+		cad = 'No hay una sinopsis disponible.'
+	else:
+		cad = cadena
+	return cad
