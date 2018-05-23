@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from requests_oauthlib import OAuth1
 from requests_oauthlib import OAuth2Session
-import requests_oauthlib
 import json
 import requests
 import os
@@ -136,7 +135,7 @@ def resultado(tipo, code):
 				if 'token_sp' in session:
 						headers = {'Accept': 'application/json', 'Content-Type': 'application-json', 'Authorization': 'Bearer ' + session['token_sp']}
 						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'limit': 1}
-						r_sp = oauth2.get(URL_BASE_SP, params = pl_sp, headers = headers)
+						r_sp = requests.get(URL_BASE_SP, params = pl_sp, headers = headers)
 						if r_sp.status_code == 200:
 							datos_sp = {'nombrepl': r_sp['playlists']['items'][0]['name'], 'url': r_sp['playlists']['items'][0]['external_urls']['spotify']}
 				else:
