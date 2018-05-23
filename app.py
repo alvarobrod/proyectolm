@@ -95,9 +95,13 @@ def busqueda():
 				if r.status_code == 200:
 					js = r.json()
 					lista = []
-					for i in js['results']:
-						lista.append({'titulo': i['title'], 'id': i['id']})
-					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
+					if js['total_results'] != 0:
+						for i in js['results']:
+							lista.append({'titulo': i['title'], 'id': i['id']})
+						error = None	
+					else:
+						error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
+					return render_template('busqueda.html', datos = lista, error = error, tipo = request.form['tipo'])
 			else:
 				payload = {'api_key': tmdb_key, 'language': language, 'query': titulo_form, 'page': '1'}
 				r = requests.get(URL_BASE_TMDB + 'search/tv', params = payload)
