@@ -34,10 +34,10 @@
 					{% endif %}
 					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
 					<h3><strong>Género: {{ datos['generos'] }}</strong></h3>
-					{% if datos['sinopsis'] = "" %}
-						<p>No existe sinopsis</p>
+					{% if datos['sinopsis'] != "" %}
+					<p>{{ datos['sinopsis'] }}</p>
 					{% else %}
-						<p>{{ datos['sinopsis'] }}</p>
+					<p>No existe sinopsis</p>
 					{% endif %}
 					{% if tipo != "pelis" %}
 					<h3>Temporadas:</h3>
