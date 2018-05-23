@@ -149,7 +149,8 @@ def resultado(tipo, code):
 						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'limit': 1}
 						r_sp = oauth2.get(URL_BASE_SP, params = pl_sp, headers = headers)
 						if r_sp.status_code == 200:
-							datos_sp = {'nombrepl': r_sp['playlists']['items'][0]['name'], 'url': r_sp['playlists']['items'][0]['external_urls']['spotify']}
+							js_sp = r_sp.json()
+							datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
 				else:
 					datos_sp = None
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
