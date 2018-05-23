@@ -134,6 +134,7 @@ def resultado(tipo, code):
 				js2 = r2.json()
 				lis = []
 				cast = js2['cast']
+				datos_sp = {}
 				if not cast:
 					reparto = None
 				else:
