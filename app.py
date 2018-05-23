@@ -155,7 +155,7 @@ def resultado(tipo, code):
 								datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
 							else:
 								datos_sp = None
-								error = 'No se han podido encontrar resultados en Spotify para esta serie.' 
+								error = 'No se han podido encontrar resultados en Spotify para esta película.' 
 				else:
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error)
