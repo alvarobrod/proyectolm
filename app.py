@@ -175,6 +175,18 @@ def resultado(tipo, code):
 					for i in range(0, 3):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
-				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo)
+				if 'token_sp' in session:
+					if validtoken():
+						token = json.loads(session['token_sp'])
+						oauth2 = OAuth2Session(os.environ['client_id'], token = token)
+						headers = {'Accept': 'application/json', 'Content-Type': 'application-json', 'Authorization': 'Bearer ' + session['token_sp']}
+						pl_sp = {'q': funciones.quitaespacios(dic_res['titulo']), 'type': 'playlist', 'limit': 1}
+						r_sp = oauth2.get(URL_BASE_SP, params = pl_sp, headers = headers)
+						if r_sp.status_code == 200:
+							js_sp = r_sp.json()
+							datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
+				else:
+					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
 
 app.run('0.0.0.0', int(port), debug = True)
