@@ -139,7 +139,10 @@ def resultado(tipo, code):
 				if not cast:
 					reparto = None
 				else:
-					for i in range(0, 3):
+					max = 3
+					if len(cast) < 3:
+						max = len(cast)
+					for i in range(0, max):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
 				if 'token_sp' in session:
@@ -177,7 +180,10 @@ def resultado(tipo, code):
 				if not cast:
 					reparto = None
 				else:
-					for i in range(0, 3):
+					max = 3
+					if len(cast) < 3:
+						max = len(cast)
+					for i in range(0, max):
 						lis.append(cast[i])
 						reparto = funciones.generos(lis)
 				if 'token_sp' in session:
