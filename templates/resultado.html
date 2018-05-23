@@ -16,10 +16,10 @@
 
 <div id="main">
 	<section id ="resultado" class="main">
-		{% if error %}
 		<div class="imagen">
 			<img src="https://image.tmdb.org/t/p/w300{{ datos['poster'] }}" alt="Poster">
 		</div>
+		{% if error %}
 		<div class="danger">
 			<p><strong>{{ error }}</strong></p>
 		</div>
