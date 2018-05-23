@@ -169,6 +169,7 @@ def resultado(tipo, code):
 				js2 = r2.json()
 				lis = []
 				cast = js2['cast']
+				error = None
 				if not cast:
 					reparto = None
 				else:
@@ -186,7 +187,6 @@ def resultado(tipo, code):
 							js_sp = r_sp.json()
 							if len(js_sp['playlists']['items']) != 0:
 								datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
-								error = None
 							else:
 								datos_sp = None
 								error = 'No se han podido encontrar resultados en Spotify para esta serie.'
