@@ -121,6 +121,7 @@ def busqueda():
 
 @app.route('/busqueda/<tipo>/<code>')
 def resultado(tipo, code):
+	error = None
 	if tipo == 'pelis':
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code, params = payload)
@@ -169,7 +170,6 @@ def resultado(tipo, code):
 				js2 = r2.json()
 				lis = []
 				cast = js2['cast']
-				error = None
 				if not cast:
 					reparto = None
 				else:
