@@ -108,9 +108,13 @@ def busqueda():
 				if r.status_code == 200:
 					js = r.json()
 					lista = []
-					for i in js['results']:
-						lista.append({'titulo': i['name'], 'id': i['id']})
-					return render_template('busqueda.html', datos = lista, error = None, tipo = request.form['tipo'])
+					if js['total_results'] != 0:
+						for i in js['results']:
+							lista.append({'titulo': i['name'], 'id': i['id']})
+						error = None
+					else:
+						error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
+					return render_template('busqueda.html', datos = lista, error = error, tipo = request.form['tipo'])
 		else:
 			error = 'Debes introducir un título en el cuadro de búsqueda.'
 			return render_template('busqueda.html', error = error)
