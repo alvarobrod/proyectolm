@@ -29,7 +29,7 @@ def quitaespacios(cadena):
 
 def tratarsinopsis(cadena):
 	cad = ''
-	if cadena = '':
+	if cadena == '':
 		cad = 'No hay una sinopsis disponible.'
 	else:
 		cad = cadena
