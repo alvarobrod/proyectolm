@@ -49,7 +49,7 @@ def spotify():
 @app.route('/perfil_spotify')
 def info_perfil_spotify():
 	if validtoken():
-		return redirect('/inicioses_sp')
+		return redirect('/iniciosesion')
 	else:
 		oauth2 = OAuth2Session(os.environ['client_id'], redirect_uri = redirect_uri, scope = scope_sp)
 		authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
@@ -62,16 +62,16 @@ def get_token_spotify():
 	oauth2 = OAuth2Session(os.environ['client_id'], state = session['oauth_state_sp'], redirect_uri = redirect_uri)
 	token = oauth2.fetch_token(token_url_sp, client_secret = os.environ['client_secret'], authorization_response = request.url[:4] + 's' + request.url[4:])
 	session['token_sp'] = json.dumps(token)
-	return redirect('/inicioses_sp')
+	return redirect('/iniciosesion')
 
-@app.route('/inicioses_sp')
-def inicioses_sp():
+@app.route('/iniciosesion')
+def iniciosesion():
 	if validtoken():
 		token = json.loads(session['token_sp'])
 		oauth2 = OAuth2Session(os.environ['client_id'], token = token)
 		r = oauth2.get('https://api.spotify.com/v1/me')
 		doc = json.loads(r.content.decode('utf-8'))
-		return render_template('inicioses_sp.html', datos = doc)
+		return render_template('iniciosesion.html', datos = doc)
 	else:
 		return redirect('/perfil')
 
