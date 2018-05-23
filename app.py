@@ -28,7 +28,7 @@ def inicio():
 
 def validtoken():
 	try:
-		token=json.loads(session['token_sp'])
+		token = json.loads(session['token_sp'])
 	except:
 		token = False
 	if token:
@@ -41,8 +41,6 @@ def validtoken():
 	else:
 		token_ok = False
 	return token_ok
-
-oauth2 = OAuth2Session(os.environ['client_id'], token = token)
 
 @app.route('/spotify')
 def spotify():
