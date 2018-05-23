@@ -26,6 +26,8 @@ def inicio():
 
 # Spotify
 
+oauth2 = OAuth2Session(os.environ['client_id'], token = token)
+
 def validtoken():
 	try:
 		token=json.loads(session['token_sp'])
