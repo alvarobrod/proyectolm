@@ -153,7 +153,7 @@ def resultado(tipo, code):
 							datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
 				else:
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
-				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
@@ -184,9 +184,14 @@ def resultado(tipo, code):
 						r_sp = oauth2.get(URL_BASE_SP, params = pl_sp, headers = headers)
 						if r_sp.status_code == 200:
 							js_sp = r_sp.json()
-							datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
+							if len(js_sp['playlists']['items']) != 0:
+								datos_sp = {'nombrepl': js_sp['playlists']['items'][0]['name'], 'url': js_sp['playlists']['items'][0]['external_urls']['spotify']}
+								error = None
+							else:
+								datos_sp = None
+								error = 'No se han podido encontrar resultados en Spotify para esta serie.'
 				else:
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
-				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error)
 
 app.run('0.0.0.0', int(port), debug = True)
