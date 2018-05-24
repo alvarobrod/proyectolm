@@ -220,7 +220,9 @@ def relacionados(tipo, code):
 				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
 			return render_template('busqueda.html', datos = lista, error = error, tipo = tipo)
 	else:
-		payload = {'api_key': tmdb_key, 'language': language, 'page': '1'}
-		r = requests.get()
+		# payload = {'api_key': tmdb_key, 'language': language, 'page': '1'}
+		# r = requests.get()
+		print()
+
 
 app.run('0.0.0.0', int(port), debug = True)
