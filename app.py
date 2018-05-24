@@ -204,4 +204,20 @@ def resultado(tipo, code):
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error, code = code)
 
+@app.route('/relacionados/<tipo>/<code>', methods = ['POST'])
+def resultado(tipo, code):
+	if tipo == 'pelis':
+		payload = {'api_key': tmdb_key, 'language': language}
+		r = requests.get(URL_BASE_TMDB + 'movie/' + code + '/similar', params = payload)
+		if r.status_code == 200:
+			js = r.json()
+			lista = []
+			if js['total_results'] != 0:
+				for i in js['results']:
+					lista.append({'titulo': i['title'], 'id': i['id']})
+				error = None	
+			else:
+				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
+			return render_template('busqueda.html', datos = lista, error = error, tipo = request.form['tipo'])
+
 app.run('0.0.0.0', int(port), debug = True)

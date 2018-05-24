@@ -45,7 +45,7 @@
 					{% endif %}
 					<h4><strong>Productora(s):</strong> {{ datos['compañias'] }}</h4>
 					<a href="{{ datos_sp['url'] }}">{{ datos_sp['nombrepl'] }}</a><br>
-					<a href="/relacionados/{{ code }}">Buscar {% if tipo == "pelis" %}pelis{% else %}series{% endif %} relacionadas</a>
+					<a href="/relacionados/{{ tipo }}/{{ code }}">Buscar {% if tipo == "pelis" %}pelis{% else %}series{% endif %} relacionadas</a>
 				</header>
 			</div>
 		</div>
