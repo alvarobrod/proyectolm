@@ -205,7 +205,7 @@ def resultado(tipo, code):
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error, code = code)
 
 @app.route('/relacionados/<tipo>/<code>', methods = ['POST'])
-def resultado(tipo, code):
+def relacionados(tipo, code):
 	if tipo == 'pelis':
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code + '/similar', params = payload)
