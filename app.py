@@ -161,7 +161,7 @@ def resultado(tipo, code):
 								error = 'No se han podido encontrar resultados en Spotify para esta película.' 
 				else:
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
-				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error, code = code)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language}
 		r = requests.get(URL_BASE_TMDB + 'tv/' + code, params = payload)
@@ -202,6 +202,6 @@ def resultado(tipo, code):
 								error = 'No se han podido encontrar resultados en Spotify para esta serie.'
 				else:
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
-				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error)
+				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error, code = code)
 
 app.run('0.0.0.0', int(port), debug = True)
