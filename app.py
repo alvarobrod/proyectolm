@@ -219,5 +219,7 @@ def resultado(tipo, code):
 			else:
 				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
 			return render_template('busqueda.html', datos = lista, error = error, tipo = request.form['tipo'])
+	else:
+		return render_template('index.html')
 
 app.run('0.0.0.0', int(port), debug = True)
