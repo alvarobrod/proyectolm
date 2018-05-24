@@ -9,8 +9,12 @@ def formatfecha(fecha):
 	return '{}/{}/{}'.format(fecha.split('-')[2], fecha.split('-')[1], fecha.split('-')[0])
 
 def getaño(fecha):
-	
-	return fecha.split('-')[0]
+	cad = ''
+	if fecha == None:
+		cad = '0'
+	else:
+		cad = fecha.split('-')[0]
+	return cad
 
 def generos(lista):
 	l = []

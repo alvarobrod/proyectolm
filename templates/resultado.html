@@ -26,7 +26,7 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
-					<h1><strong>{{ datos['titulo'] }}</strong> {% if datos['año'] != None %} ({{ datos['año'] }}) {% endif %}</h1>
+					<h1><strong>{{ datos['titulo'] }}</strong> {% if datos['año'] != "0" %} ({{ datos['año'] }}) {% endif %}</h1>
 					<h3>{{ cast }}</h3>
 					{% if tipo != "pelis" %}
 					<h3><strong>Cadena:</strong> {{ datos['cadena'] }}</h3>
