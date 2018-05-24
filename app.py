@@ -128,7 +128,7 @@ def resultado(tipo, code):
 		if r.status_code == 200:
 			js = r.json()
 			dic_res = {'titulo': js['title'], 'año': funciones.getaño(js['release_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': funciones.tratarsinopsis(js['overview']), \
-																	  'generos': funciones.generos(js['genres']), 'poster': js['poster_path']}
+																	  'generos': funciones.generos(js['genres']), 'poster': js['poster_path'], 'compañias': funciones.generos(js['production_companies'])}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'movie/' + '{}/credits'.format(code), params = payload2)
 			if r2.status_code == 200:
@@ -170,7 +170,7 @@ def resultado(tipo, code):
 			titulo = js['name']
 			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': funciones.tratarsinopsis(js['overview']), \
 																	 'generos': funciones.generos(js['genres']), 'poster': js['poster_path'], 'estado': funciones.estado(js['status']), 'cadena': js['networks'][0]['name'], \
-																	 'temporadas': funciones.temporadas(js['seasons'])}
+																	 'temporadas': funciones.temporadas(js['seasons']), 'compañias': funciones.generos(js['production_companies'])}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'tv/' + '{}/credits'.format(code), params = payload2)
 			if r2.status_code == 200:
