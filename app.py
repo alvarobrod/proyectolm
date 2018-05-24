@@ -227,7 +227,7 @@ def relacionados(tipo, code):
 			lista = []
 			if js['total_results'] != 0:
 				for i in js['results']:
-					lista.append({'titulo': i['title'], 'id': i['id']})
+					lista.append({'titulo': i['name'], 'id': i['id']})
 				error = None	
 			else:
 				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
