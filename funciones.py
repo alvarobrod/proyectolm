@@ -24,7 +24,7 @@ def temporadas(lista):
 	return l
 
 def quitaespacios(cadena):
-	cad = cadena.replace(' ', '%20')
+	cad = cadena.replace(' ', '+')
 	return cad
 
 def tratarsinopsis(cadena):
