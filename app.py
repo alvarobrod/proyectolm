@@ -207,7 +207,7 @@ def resultado(tipo, code):
 @app.route('/relacionados/<tipo>/<code>')
 def relacionados(tipo, code):
 	if tipo == 'pelis':
-		payload = {'api_key': tmdb_key, 'language': language}
+		payload = {'api_key': tmdb_key, 'language': language, 'page': '1'}
 		r = requests.get(URL_BASE_TMDB + 'movie/' + code + '/similar', params = payload)
 		if r.status_code == 200:
 			js = r.json()
@@ -218,8 +218,9 @@ def relacionados(tipo, code):
 				error = None	
 			else:
 				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
-			return render_template('busqueda.html', datos = lista, error = error, tipo = request.form['tipo'])
+			return render_template('busqueda.html', datos = lista, error = error, tipo = tipo)
 	else:
-		return render_template('index.html')
+		payload = {'api_key': tmdb_key, 'language': language, 'page': '1'}
+		r = requests.get()
 
 app.run('0.0.0.0', int(port), debug = True)
