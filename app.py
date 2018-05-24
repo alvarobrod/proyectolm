@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
 from requests_oauthlib import OAuth1, OAuth2Session
-from requests_oauthlib import 
 import json, requests, os, funciones
 
 app = Flask(__name__)
