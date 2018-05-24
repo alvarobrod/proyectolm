@@ -169,7 +169,7 @@ def resultado(tipo, code):
 			js = r.json()
 			titulo = js['name']
 			dic_res = {'titulo': js['name'], 'año': funciones.getaño(js['first_air_date']), 'rating': js['vote_average'], 'votos': js['vote_count'], 'sinopsis': funciones.tratarsinopsis(js['overview']), \
-																	 'generos': funciones.generos(js['genres']), 'poster': js['poster_path'], 'estado': js['status'], 'cadena': js['networks'][0]['name'], \
+																	 'generos': funciones.generos(js['genres']), 'poster': js['poster_path'], 'estado': funciones.estado(js['status']), 'cadena': js['networks'][0]['name'], \
 																	 'temporadas': funciones.temporadas(js['seasons'])}
 			payload2 = {'api_key': tmdb_key}
 			r2 = requests.get(URL_BASE_TMDB + 'tv/' + '{}/credits'.format(code), params = payload2)

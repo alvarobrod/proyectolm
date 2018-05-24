@@ -34,3 +34,17 @@ def tratarsinopsis(cadena):
 	else:
 		cad = cadena
 	return cad
+
+def estado(cadena):
+	cad = ''
+	if cadena == 'Returning Series':
+		cad = 'En activo'
+	elif cadena == 'Planned':
+		cad = 'Planeada'
+	elif cadena == 'In Production':
+		cad = 'En producción'
+	elif cadena == 'Ended':
+		cad = 'Finalizada'
+	elif cadena == 'Pilot':
+		cad = 'Piloto'
+	return cad
