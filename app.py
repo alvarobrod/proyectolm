@@ -204,7 +204,7 @@ def resultado(tipo, code):
 					datos_sp = {'nombrepl': 'Debes iniciar sesión en Spotify para acceder a los resultados de la búsqueda', 'url': '/spotify'}
 				return render_template('resultado.html', datos = dic_res, cast = reparto, tipo = tipo, datos_sp = datos_sp, error = error, code = code)
 
-@app.route('/relacionados/<tipo>/<code>', methods = ['POST'])
+@app.route('/relacionados/<tipo>/<code>')
 def relacionados(tipo, code):
 	if tipo == 'pelis':
 		payload = {'api_key': tmdb_key, 'language': language}
