@@ -33,7 +33,7 @@
 					<h3><strong>Estado:</strong> {{ datos['estado'] }}</h3>
 					{% endif %}
 					<span class="fa fa-star checked"></span><span> {{ datos['rating'] }} ({{ datos['votos'] }} votos)</span>
-					<h3><strong>Género: {{ datos['generos'] }}</strong></h3>
+					<h3><strong>Género:</strong> {{ datos['generos'] }}</h3>
 					<p>{{ datos['sinopsis'] }}</p>
 					{% if tipo != "pelis" %}
 					<h3>Temporadas:</h3>
@@ -43,7 +43,7 @@
 					{% endfor %}
 					</ul>
 					{% endif %}
-					<h4>Productora(s): {{ datos['compañias'] }}</h4>
+					<h4><strong>Productora(s):</strong> {{ datos['compañias'] }}</h4>
 					<a href="{{ datos_sp['url'] }}">{{ datos_sp['nombrepl'] }}</a>
 				</header>
 			</div>
