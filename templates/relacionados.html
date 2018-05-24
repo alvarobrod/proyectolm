@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Beleflix | Relacionados{% endblock %}
+
+{% block content %}
+
+<nav id="nav">
+	<ul>
+		<li><a href="/">Introducción</a></li>
+		<li><a href="#busqueda" class="active">Búsqueda</a></li>
+		<li><a href="/spotify">Login con Spotify</a></li>
+	</ul>
+</nav>
+
+<div id="main">
+	<section id ="busqueda" class="main">
+	{% if error %}
+	<div class="danger">
+		<p><strong>{{ error }}</strong></p>
+	</div>
+	{% endif %}
+		<div class="spotlight">
+			<div class="content">
+				<header class="major">
+					{% for i in datos %}
+					<a href="/busqueda/{{ tipo }}/{{ i['id'] }}">{{ i['titulo'] }}</a><br>
+					{% endfor %}
+				</header>
+			</div>
+		</div>
+	</section>
+</div>
+
+{% endblock %}
