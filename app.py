@@ -221,7 +221,16 @@ def relacionados(tipo, code):
 			return render_template('relacionados.html', datos = lista, error = error, tipo = tipo)
 	else:
 		payload = {'api_key': tmdb_key, 'language': language, 'page': '1'}
-		r = requests.get(URL_BASE_TMDB + 'movie/' + code + '/recommendations', params = payload)
-
+		r = requests.get(URL_BASE_TMDB + 'tv/' + code + '/recommendations', params = payload)
+		if r.status_code == 200:
+			js = r.json()
+			lista = []
+			if js['total_results'] != 0:
+				for i in js['results']:
+					lista.append({'titulo': i['title'], 'id': i['id']})
+				error = None	
+			else:
+				error = 'No hay resultados que mostrar. Por favor, busca de nuevo.'
+			return render_template('relacionados.html', datos = lista, error = error, tipo = tipo)
 
 app.run('0.0.0.0', int(port), debug = True)
