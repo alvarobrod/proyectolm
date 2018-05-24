@@ -22,6 +22,7 @@
 		<div class="spotlight">
 			<div class="content">
 				<header class="major">
+					<h1>{% if tipo == "pelis" %}Películas{% else %}Series{% endif %} relacionadas</h1>
 					{% for i in datos %}
 					<a href="/busqueda/{{ tipo }}/{{ i['id'] }}">{{ i['titulo'] }}</a><br>
 					{% endfor %}
