@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
-from requests_oauthlib import OAuth1
-from requests_oauthlib import OAuth2Session
-import json
-import requests
-import os
-import funciones
+from requests_oauthlib import OAuth1, OAuth2Session
+from requests_oauthlib import 
+import json, requests, os, funciones
 
 app = Flask(__name__)
 app.secret_key= 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
